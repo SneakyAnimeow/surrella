@@ -29,7 +29,6 @@ public class Surrella implements Loggable {
     @Getter
     private static final String VERSION = "beta 1.2";
 
-    @Getter
     private static Surrella instance;
 
     @Getter
@@ -53,23 +52,22 @@ public class Surrella implements Loggable {
     /**
      * Initializes the Surrella instance
      */
-    public static void init() {
-        instance = new Surrella();
+    public static Surrella getInstance() {
+        return instance == null ? instance = new Surrella() : instance;
     }
 
     /**
      * Starts the Surrella instance
+     *
      * @param token The bot token
      */
-    public void start(String token){
+    public void start(String token) {
         getLogger().info("Connecting to discord with provided token...");
 
-        try{
-            jda = JDABuilder.createDefault(token, GatewayIntent.getIntents(GatewayIntent.ALL_INTENTS))
-                    .setActivity(Activity.listening("/surrella"))
-                    .build();
+        try {
+            jda = JDABuilder.createDefault(token, GatewayIntent.getIntents(GatewayIntent.ALL_INTENTS)).setActivity(Activity.listening("/surrella")).build();
 
-        }catch (Exception e){
+        } catch (Exception e) {
             getLogger().error("Failed to connect to discord", e);
             System.exit(1);
         }
@@ -105,7 +103,7 @@ public class Surrella implements Loggable {
             });
 
             OptionData[] options = null;
-            if(Arrays.asList(slashCommand.getInterfaces()).contains(SlashCommandOptions.class)) {
+            if (Arrays.asList(slashCommand.getInterfaces()).contains(SlashCommandOptions.class)) {
                 try {
                     options = ((SlashCommandOptions) slashCommand.getDeclaredConstructor(SlashCommandContext.class).newInstance(new SlashCommandContext())).getOptions();
                 } catch (Exception e) {
@@ -114,13 +112,13 @@ public class Surrella implements Loggable {
                 }
             }
 
-            if(options != null) {
-                for(var i=0; i<commands.size(); i++) {
+            if (options != null) {
+                for (var i = 0; i < commands.size(); i++) {
                     commands.set(i, commands.get(i).addOptions(options));
                 }
             }
 
-            for(var i=0; i<commands.size(); i++){
+            for (var i = 0; i < commands.size(); i++) {
                 commands.set(i, commands.get(i).setGuildOnly(annotatedClass.serverOnly()));
                 getLogger().debug("Loaded command " + commands.get(i).getName());
             }

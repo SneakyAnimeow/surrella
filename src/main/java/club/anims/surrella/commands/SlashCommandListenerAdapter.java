@@ -1,6 +1,7 @@
 package club.anims.surrella.commands;
 
 import club.anims.surrella.interfaces.Loggable;
+import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.entities.MessageEmbed;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
@@ -27,6 +28,42 @@ public class SlashCommandListenerAdapter extends ListenerAdapter implements Logg
             var annotatedClass = slashCommand.getAnnotation(SlashCommand.class);
 
             if(annotatedClass.name().equals(command) || Arrays.asList(annotatedClass.aliases()).contains(command)) {
+                boolean hasPermission = switch (annotatedClass.permission()){
+                    case MOD -> {
+                        if (event.getMember() == null) yield false;
+
+                        yield event.getMember().hasPermission(Permission.KICK_MEMBERS, Permission.VOICE_MOVE_OTHERS);
+                    }
+
+                    case ADMIN -> {
+                        if (event.getMember() == null) yield false;
+
+                        yield event.getMember().hasPermission(Permission.ADMINISTRATOR);
+                    }
+
+                    case OWNER -> {
+                        if (event.getMember() == null) yield false;
+
+                        yield event.getMember().getGuild().retrieveOwner().complete().equals(event.getMember());
+                    }
+
+                    case BOT_SUPPORT -> {
+                        //TODO: check if user is in bot support db
+                        yield false;
+                    }
+
+                    case BOT_OWNER -> {
+                        //TODO: check if user is the bot owner
+                        yield false;
+                    }
+
+                    default -> true;
+                };
+
+                if(hasPermission){
+
+                }
+
                 try {
                     var slashCommandAdapter = (SlashCommandAdapter) slashCommand.getDeclaredConstructor(SlashCommandContext.class).newInstance(context);
                     var reply = slashCommandAdapter.execute();

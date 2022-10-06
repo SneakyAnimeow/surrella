@@ -15,8 +15,6 @@ public class SurrellaLauncher {
             System.exit(1);
         }
 
-        Surrella.init();
-
         Surrella.getInstance().start(token);
     }
 }
