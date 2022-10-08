@@ -1,9 +1,10 @@
 package club.anims.surrella.interfaces;
 
-import org.slf4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public interface Loggable {
     default Logger getLogger() {
-        return org.slf4j.LoggerFactory.getLogger(getClass());
+        return LogManager.getLogger(getClass());
     }
 }

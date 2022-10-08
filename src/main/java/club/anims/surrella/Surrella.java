@@ -2,6 +2,7 @@ package club.anims.surrella;
 
 import club.anims.surrella.audio.AudioPlayerSendHandler;
 import club.anims.surrella.commands.*;
+import club.anims.surrella.config.Config;
 import club.anims.surrella.interfaces.Loggable;
 import com.sedmelluq.discord.lavaplayer.player.AudioPlayerManager;
 import com.sedmelluq.discord.lavaplayer.player.DefaultAudioPlayerManager;
@@ -27,7 +28,7 @@ import static org.reflections.scanners.Scanners.TypesAnnotated;
 
 public class Surrella implements Loggable {
     @Getter
-    private static final String VERSION = "beta 1.2";
+    private static final String VERSION = "beta 1.3";
 
     private static Surrella instance;
 
@@ -58,14 +59,12 @@ public class Surrella implements Loggable {
 
     /**
      * Starts the Surrella instance
-     *
-     * @param token The bot token
      */
-    public void start(String token) {
+    public void start() {
         getLogger().info("Connecting to discord with provided token...");
 
         try {
-            jda = JDABuilder.createDefault(token, GatewayIntent.getIntents(GatewayIntent.ALL_INTENTS)).setActivity(Activity.listening("/surrella")).build();
+            jda = JDABuilder.createDefault(Config.getInstance().getToken(), GatewayIntent.getIntents(GatewayIntent.ALL_INTENTS)).setActivity(Activity.listening("/surrella")).build();
 
         } catch (Exception e) {
             getLogger().error("Failed to connect to discord", e);

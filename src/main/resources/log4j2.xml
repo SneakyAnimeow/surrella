@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="INFO">
+    <Appenders>
+        <Console name="Console" target="SYSTEM_OUT">
+            <PatternLayout pattern="(%d{yyy-MM-dd HH:mm:ss}) [%8.-8t] &lt;%5.5level&gt;  %logger{36}: %msg%n" />
+        </Console>
+        <RollingFile name="File" filePattern="logs/%d{yyy-MM-dd}-%i.log" immediateFlush="false" append="false">
+            <PatternLayout pattern="(%d{yyy-MM-dd HH:mm:ss}) [%8.-8t] &lt;%5.5level&gt;  %logger{36}: %msg%n" />
+            <Policies>
+                <TimeBasedTriggeringPolicy interval="1" modulate="true"/>
+                <SizeBasedTriggeringPolicy size="32 MB" />
+                <OnStartupTriggeringPolicy/>
+            </Policies>
+        </RollingFile>
+    </Appenders>
+    <Loggers>
+        <Logger name="org.reflections" level="OFF">
+            <AppenderRef ref="Console" />
+            <AppenderRef ref="File" />
+        </Logger>
+
+        <Logger name="org.hibernate" level="INFO">
+            <AppenderRef ref="Console" />
+            <AppenderRef ref="File" />
+        </Logger>
+
+        <Logger name="net.dv8tion.jda" level="INFO">
+            <AppenderRef ref="Console" />
+            <AppenderRef ref="File" />
+        </Logger>
+
+        <Logger name="com.sedmelluq.discord" level="INFO">
+            <AppenderRef ref="Console" />
+            <AppenderRef ref="File" />
+        </Logger>
+
+        <Root level="DEBUG">
+            <AppenderRef ref="Console" />
+            <AppenderRef ref="File"/>
+        </Root>
+    </Loggers>
+</Configuration>
