@@ -25,14 +25,14 @@ public class SlashCommandListenerAdapter extends ListenerAdapter implements Logg
         var service = JPAService.getInstance();
         var em = service.getEmf().createEntityManager();
 
-        try{
-            if(em.createNamedQuery("BlacklistedUser.existsByDiscordId", Boolean.class).setParameter("discordId", event.getUser().getId()).getSingleResult()) {
+        try {
+            if (em.createNamedQuery("BlacklistedUser.existsByDiscordId", Boolean.class).setParameter("discordId", event.getUser().getId()).getSingleResult()) {
                 getLogger().info("%s (ID %s) got rejected from using the bot".formatted(event.getUser().getAsTag(), event.getUser().getId()));
 
                 event.reply("You are blacklisted from using this bot").queue();
                 return;
             }
-        }finally {
+        } finally {
             em.close();
         }
 
@@ -47,7 +47,7 @@ public class SlashCommandListenerAdapter extends ListenerAdapter implements Logg
                 var permission = Permission.fromMember(event.getMember());
 
                 if (!permission.isSufficient(annotatedClass.permission())) {
-                    event.reply("To use this command your permission level must be at least: "+annotatedClass.permission()).setEphemeral(true).queue();
+                    event.reply("To use this command your permission level must be at least: " + annotatedClass.permission()).setEphemeral(true).queue();
                     return;
                 }
 

@@ -10,7 +10,7 @@ import net.dv8tion.jda.api.interactions.commands.build.OptionData;
 import java.util.List;
 
 @SlashCommand(name = "blacklist_add", description = "Blacklists a user from using the bot", aliases = {"ba"}, permission = Permission.BOT_OWNER)
-public class BlacklistAdd extends SlashCommandAdapter implements SlashCommandOptions{
+public class BlacklistAdd extends SlashCommandAdapter implements SlashCommandOptions {
     public BlacklistAdd(SlashCommandContext context) {
         super(context);
     }
@@ -51,7 +51,7 @@ public class BlacklistAdd extends SlashCommandAdapter implements SlashCommandOpt
     @Override
     public OptionData[] getOptions() {
         return new OptionData[]{
-                new OptionData(OptionType.USER, "user", "User to blacklist", true, true)
+                new OptionData(OptionType.USER, "user", "User to blacklist", true)
         };
     }
 }

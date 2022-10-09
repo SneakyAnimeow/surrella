@@ -6,7 +6,7 @@ import club.anims.surrella.commands.*;
 import java.util.List;
 
 @SlashCommand(name = "surrella", description = "Default command", permission = Permission.DEFAULT)
-public class Surrella extends SlashCommandAdapter{
+public class Surrella extends SlashCommandAdapter {
     public Surrella(SlashCommandContext context) {
         super(context);
     }

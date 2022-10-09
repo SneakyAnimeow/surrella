@@ -7,7 +7,7 @@ import club.anims.surrella.commands.*;
 import java.util.List;
 
 @SlashCommand(name = "unfollow", description = "Unfollows the user", permission = Permission.DEFAULT)
-public class Unfollow extends SlashCommandAdapter{
+public class Unfollow extends SlashCommandAdapter {
     public Unfollow(SlashCommandContext context) {
         super(context);
     }
@@ -17,7 +17,7 @@ public class Unfollow extends SlashCommandAdapter{
         var guild = getContext().getChannelUnion().asGuildMessageChannel().getGuild();
         var member = guild.retrieveMember(getContext().getSender()).complete();
 
-        var followingMembers  = Surrella.getInstance().getFollowingMembers().get(guild);
+        var followingMembers = Surrella.getInstance().getFollowingMembers().get(guild);
 
         if (followingMembers == null) {
             return new SlashCommandReply(SlashCommandReply.ReplyType.EMBEDS, List.of(
@@ -25,16 +25,16 @@ public class Unfollow extends SlashCommandAdapter{
             ));
         }
 
-        followingMembers.remove(member);
+        var followedMember = followingMembers.remove(member);
 
-        if(!member.getUser().isBot()){
-            member.getUser().openPrivateChannel().queue(privateChannel -> {
-                privateChannel.sendMessage(member.getAsMention() + " is no longer following you in server "+ guild.getName()).queue();
+        if (!followedMember.getUser().isBot()) {
+            followedMember.getUser().openPrivateChannel().queue(privateChannel -> {
+                privateChannel.sendMessage(member.getAsMention() + " is no longer following you in server " + guild.getName()).queue();
             });
         }
 
         return new SlashCommandReply(SlashCommandReply.ReplyType.EMBEDS, List.of(
-                SurrellaEmbedFactory.createEmbed("Surrella - Unfollow", "No longer following " + member.getAsMention())
+                SurrellaEmbedFactory.createEmbed("Surrella - Unfollow", "No longer following " + followedMember.getAsMention())
         ));
     }
 }

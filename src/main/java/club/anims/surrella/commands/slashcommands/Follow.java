@@ -28,19 +28,19 @@ public class Follow extends SlashCommandAdapter implements SlashCommandOptions {
             ));
         }
 
-        if(member.getIdLong() == memberToFollow.getIdLong()) {
+        if (member.getIdLong() == memberToFollow.getIdLong()) {
             return new SlashCommandReply(SlashCommandReply.ReplyType.EMBEDS, List.of(
                     SurrellaEmbedFactory.createEmbed("Surrella - Follow", "You can't follow yourself")
             ));
         }
 
-        var followingMembers =  Surrella.getInstance().getFollowingMembers().computeIfAbsent(guild, v -> new HashMap<>());
+        var followingMembers = Surrella.getInstance().getFollowingMembers().computeIfAbsent(guild, v -> new HashMap<>());
 
         followingMembers.put(member, memberToFollow);
 
-        if(!memberToFollow.getUser().isBot()){
+        if (!memberToFollow.getUser().isBot()) {
             memberToFollow.getUser().openPrivateChannel().queue(privateChannel -> {
-                privateChannel.sendMessage(member.getAsMention() + " is now following you in server "+ guild.getName()).queue();
+                privateChannel.sendMessage(member.getAsMention() + " is now following you in server " + guild.getName()).queue();
             });
         }
 

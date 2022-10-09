@@ -20,9 +20,9 @@ public class Join extends SlashCommandAdapter {
         var guild = getContext().getChannelUnion().asGuildMessageChannel().getGuild();
 
         AudioChannel audioChannel;
-        try{
+        try {
             audioChannel = guild.getMember(getContext().getSender()).getVoiceState().getChannel();
-        }catch (Exception e){
+        } catch (Exception e) {
             return new SlashCommandReply(SlashCommandReply.ReplyType.EMBEDS, List.of(
                     SurrellaEmbedFactory.createEmbed("Surrella - Join", "You are not in a voice channel")
             ));

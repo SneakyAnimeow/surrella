@@ -9,7 +9,7 @@ import net.dv8tion.jda.api.interactions.commands.build.OptionData;
 import java.util.List;
 
 @SlashCommand(name = "support_delete", description = "Deletes user from bot support", aliases = {"sd"}, permission = Permission.BOT_OWNER)
-public class SupportDelete extends SlashCommandAdapter implements SlashCommandOptions{
+public class SupportDelete extends SlashCommandAdapter implements SlashCommandOptions {
     public SupportDelete(SlashCommandContext context) {
         super(context);
     }
@@ -51,7 +51,7 @@ public class SupportDelete extends SlashCommandAdapter implements SlashCommandOp
     @Override
     public OptionData[] getOptions() {
         return new OptionData[]{
-                new OptionData(OptionType.USER, "user", "User to remove from bot support", true, true)
+                new OptionData(OptionType.USER, "user", "User to remove from bot support", true)
         };
     }
 }

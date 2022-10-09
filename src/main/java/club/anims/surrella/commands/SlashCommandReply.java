@@ -5,7 +5,11 @@ import net.dv8tion.jda.api.utils.AttachmentOption;
 
 import java.io.InputStream;
 
-@Getter @Setter @Builder @NoArgsConstructor @AllArgsConstructor
+@Getter
+@Setter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class SlashCommandReply {
     public enum ReplyType {
         TEXT,
@@ -17,15 +21,21 @@ public class SlashCommandReply {
         NONE
     }
 
-    @Getter @Setter @NoArgsConstructor @AllArgsConstructor
+    @Getter
+    @Setter
+    @NoArgsConstructor
+    @AllArgsConstructor
     public class ByteArrayReply {
         private byte[] bytes;
         private String name;
         private AttachmentOption[] options;
     }
 
-    @Getter @Setter @NoArgsConstructor @AllArgsConstructor
-    public class InputStreamReply{
+    @Getter
+    @Setter
+    @NoArgsConstructor
+    @AllArgsConstructor
+    public class InputStreamReply {
         private InputStream inputStream;
         private String name;
         private AttachmentOption[] options;

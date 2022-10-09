@@ -6,7 +6,10 @@ import lombok.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
-@Getter @Setter @AllArgsConstructor @NoArgsConstructor
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class Config implements Jsonable<Config> {
     private static final Path PATH = Path.of("config.json");
 
@@ -23,7 +26,7 @@ public class Config implements Jsonable<Config> {
     private String ownerId;
 
     @SneakyThrows
-    public static Config getInstance(){
+    public static Config getInstance() {
         return instance == null ? instance = new Config().fromJson(Files.readString(PATH)) : instance;
     }
 }

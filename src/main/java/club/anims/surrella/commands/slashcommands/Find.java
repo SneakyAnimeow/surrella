@@ -20,13 +20,13 @@ public class Find extends SlashCommandAdapter implements SlashCommandOptions {
         var guild = getContext().getChannelUnion().asGuildMessageChannel().getGuild();
         var member = guild.getMember(getContext().getSender());
 
-        try{
+        try {
             var audioChannel = member.getVoiceState().getChannel();
 
             if (audioChannel == null) {
                 throw new Exception();
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             return new SlashCommandReply(SlashCommandReply.ReplyType.EMBEDS, List.of(
                     SurrellaEmbedFactory.createEmbed("Surrella - Find", "You are not in a voice channel")
             ));
@@ -35,13 +35,13 @@ public class Find extends SlashCommandAdapter implements SlashCommandOptions {
         var target = getContext().getOptions().get(0).getAsMember();
 
         AudioChannel targetAudioChannel;
-        try{
+        try {
             targetAudioChannel = target.getVoiceState().getChannel();
 
             if (targetAudioChannel == null) {
                 throw new Exception();
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             return new SlashCommandReply(SlashCommandReply.ReplyType.EMBEDS, List.of(
                     SurrellaEmbedFactory.createEmbed("Surrella - Find", "The provided user is not in a voice channel")
             ));

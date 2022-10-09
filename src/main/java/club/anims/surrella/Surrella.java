@@ -2,17 +2,17 @@ package club.anims.surrella;
 
 import club.anims.surrella.audio.AudioPlayerSendHandler;
 import club.anims.surrella.commands.*;
+import club.anims.surrella.commands.slashcommands.Jail;
 import club.anims.surrella.config.Config;
 import club.anims.surrella.interfaces.Loggable;
+import club.anims.surrella.listeners.MovementListenerAdapter;
 import com.sedmelluq.discord.lavaplayer.player.AudioPlayerManager;
 import com.sedmelluq.discord.lavaplayer.player.DefaultAudioPlayerManager;
 import com.sedmelluq.discord.lavaplayer.source.AudioSourceManagers;
 import lombok.Getter;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
-import net.dv8tion.jda.api.entities.Activity;
-import net.dv8tion.jda.api.entities.Guild;
-import net.dv8tion.jda.api.entities.Member;
+import net.dv8tion.jda.api.entities.*;
 import net.dv8tion.jda.api.interactions.commands.build.OptionData;
 import net.dv8tion.jda.api.requests.GatewayIntent;
 import net.dv8tion.jda.api.requests.RestAction;
@@ -51,6 +51,12 @@ public class Surrella implements Loggable {
     private HashMap<Guild, HashMap<Member, Member>> followingMembers;
 
     /**
+     * HashMap of Jailed Members and the AudioChannel they're jailed in
+     */
+    @Getter
+    private HashMap<Guild, HashMap<Member, AudioChannel>> jailedMembers;
+
+    /**
      * Initializes the Surrella instance
      */
     public static Surrella getInstance() {
@@ -73,6 +79,7 @@ public class Surrella implements Loggable {
 
         loadCommands();
         jda.addEventListener(new SlashCommandListenerAdapter());
+        jda.addEventListener(new MovementListenerAdapter());
 
         playerManager = new DefaultAudioPlayerManager();
         AudioSourceManagers.registerRemoteSources(playerManager);
@@ -81,6 +88,7 @@ public class Surrella implements Loggable {
         guildAudioSendHandlers = new HashMap<>();
         timer = new Timer();
         followingMembers = new HashMap<>();
+        jailedMembers = new HashMap<>();
     }
 
     /**

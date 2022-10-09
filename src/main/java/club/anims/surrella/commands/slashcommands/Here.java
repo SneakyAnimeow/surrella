@@ -20,29 +20,31 @@ public class Here extends SlashCommandAdapter implements SlashCommandOptions {
         var member = guild.getMember(getContext().getSender());
         AudioChannel audioChannel;
 
-        try{
+        try {
             audioChannel = member.getVoiceState().getChannel();
 
             if (audioChannel == null) {
                 throw new Exception();
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             return new SlashCommandReply(SlashCommandReply.ReplyType.EMBEDS, List.of(
                     SurrellaEmbedFactory.createEmbed("Surrella - Here", "You are not in a voice channel")
             ));
         }
 
-        if(getContext().getOptions().size() < 1){
+        if (getContext().getOptions().size() < 1) {
             guild.getMembers().forEach(m -> {
-                try{
+                try {
                     guild.moveVoiceMember(m, audioChannel).queue();
-                }catch (Exception ignored){}
+                } catch (Exception ignored) {
+                }
             });
-        }else{
+        } else {
             getContext().getOptions().forEach(option -> {
-                try{
+                try {
                     guild.moveVoiceMember(option.getAsMember(), audioChannel).queue();
-                }catch (Exception ignored){}
+                } catch (Exception ignored) {
+                }
             });
         }
 

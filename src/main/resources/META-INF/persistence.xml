@@ -7,8 +7,6 @@
         <class>club.anims.surrella.database.model.SupportUser</class>
         <properties>
             <property name="javax.persistence.jdbc.url" value="jdbc:sqlite:database.db"/>
-            <property name="hibernate.connection.url" value="jdbc:sqlite:database.db"/>
-            <property name="hibernate.connection.driver_class" value="org.sqlite.JDBC"/>
         </properties>
     </persistence-unit>
 </persistence>

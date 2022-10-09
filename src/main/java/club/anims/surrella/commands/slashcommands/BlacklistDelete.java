@@ -10,7 +10,7 @@ import net.dv8tion.jda.api.interactions.commands.build.OptionData;
 import java.util.List;
 
 @SlashCommand(name = "blacklist_delete", description = "Deletes user from blacklist", aliases = {"bd"}, permission = Permission.BOT_OWNER)
-public class BlacklistDelete extends SlashCommandAdapter implements SlashCommandOptions{
+public class BlacklistDelete extends SlashCommandAdapter implements SlashCommandOptions {
     public BlacklistDelete(SlashCommandContext context) {
         super(context);
     }
@@ -52,7 +52,7 @@ public class BlacklistDelete extends SlashCommandAdapter implements SlashCommand
     @Override
     public OptionData[] getOptions() {
         return new OptionData[]{
-                new OptionData(OptionType.USER, "user", "User to remove from blacklist", true, true)
+                new OptionData(OptionType.USER, "user", "User to remove from blacklist", true)
         };
     }
 }

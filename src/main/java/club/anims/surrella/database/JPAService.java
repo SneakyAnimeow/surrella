@@ -15,7 +15,7 @@ public class JPAService {
     }
 
     public void shutdown() {
-        if(emf != null && emf.isOpen()) {
+        if (emf != null && emf.isOpen()) {
             emf.close();
         }
     }

@@ -11,7 +11,7 @@ import net.dv8tion.jda.api.interactions.commands.build.OptionData;
 import java.util.List;
 
 @SlashCommand(name = "support_add", description = "Adds a user to bot support.", aliases = {"sa"}, permission = Permission.BOT_OWNER)
-public class SupportAdd extends SlashCommandAdapter implements SlashCommandOptions{
+public class SupportAdd extends SlashCommandAdapter implements SlashCommandOptions {
     public SupportAdd(SlashCommandContext context) {
         super(context);
     }
@@ -52,7 +52,7 @@ public class SupportAdd extends SlashCommandAdapter implements SlashCommandOptio
     @Override
     public OptionData[] getOptions() {
         return new OptionData[]{
-                new OptionData(OptionType.USER, "user", "User to add to bot support", true, true)
+                new OptionData(OptionType.USER, "user", "User to add to bot support", true)
         };
     }
 }
