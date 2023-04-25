@@ -5,6 +5,8 @@ import club.anims.surrella.interfaces.Loggable;
 import net.dv8tion.jda.api.entities.MessageEmbed;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
+import net.dv8tion.jda.api.utils.FileUpload;
+import net.dv8tion.jda.api.utils.messages.MessageCreateData;
 import org.jetbrains.annotations.NotNull;
 import org.reflections.Reflections;
 
@@ -57,21 +59,21 @@ public class SlashCommandListenerAdapter extends ListenerAdapter implements Logg
                     switch (reply.getType()) {
                         case TEXT -> event.reply((String) reply.getValue()).queue();
 
-                        case MESSAGE -> event.reply((net.dv8tion.jda.api.entities.Message) reply.getValue()).queue();
+                        case MESSAGE -> event.reply((MessageCreateData) reply.getValue()).queue();
 
                         case EMBEDS -> event.replyEmbeds((Collection<? extends MessageEmbed>) reply.getValue()).queue();
 
-                        case FILE -> event.replyFile((File) reply.getValue()).queue();
+                        case FILE -> event.replyFiles((Collection<? extends FileUpload>) reply.getValue()).queue();
 
-                        case BYTE_ARRAY -> {
-                            var data = (SlashCommandReply.ByteArrayReply) reply.getValue();
-                            event.replyFile(data.getBytes(), data.getName(), data.getOptions()).queue();
-                        }
-
-                        case INPUT_STREAM -> {
-                            var data = (SlashCommandReply.InputStreamReply) reply.getValue();
-                            event.replyFile(data.getInputStream(), data.getName(), data.getOptions()).queue();
-                        }
+//                        case BYTE_ARRAY -> {
+//                            var data = (SlashCommandReply.ByteArrayReply) reply.getValue();
+//                            event.replyFile(data.getBytes(), data.getName(), data.getOptions()).queue();
+//                        }
+//
+//                        case INPUT_STREAM -> {
+//                            var data = (SlashCommandReply.InputStreamReply) reply.getValue();
+//                            event.replyFile(data.getInputStream(), data.getName(), data.getOptions()).queue();
+//                        }
 
                         default -> {
                         }

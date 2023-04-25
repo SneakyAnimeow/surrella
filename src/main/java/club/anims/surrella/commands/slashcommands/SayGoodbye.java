@@ -4,7 +4,7 @@ import club.anims.surrella.Surrella;
 import club.anims.surrella.SurrellaEmbedFactory;
 import club.anims.surrella.audio.AudioPlayerSendHandler;
 import club.anims.surrella.commands.*;
-import net.dv8tion.jda.api.entities.AudioChannel;
+import net.dv8tion.jda.api.entities.channel.middleman.AudioChannel;
 import net.dv8tion.jda.api.interactions.commands.OptionType;
 import net.dv8tion.jda.api.interactions.commands.build.OptionData;
 

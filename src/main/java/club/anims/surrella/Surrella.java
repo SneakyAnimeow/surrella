@@ -2,7 +2,6 @@ package club.anims.surrella;
 
 import club.anims.surrella.audio.AudioPlayerSendHandler;
 import club.anims.surrella.commands.*;
-import club.anims.surrella.commands.slashcommands.Jail;
 import club.anims.surrella.config.Config;
 import club.anims.surrella.interfaces.Loggable;
 import club.anims.surrella.listeners.MovementListenerAdapter;
@@ -13,6 +12,7 @@ import lombok.Getter;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.entities.*;
+import net.dv8tion.jda.api.entities.channel.middleman.AudioChannel;
 import net.dv8tion.jda.api.interactions.commands.build.OptionData;
 import net.dv8tion.jda.api.requests.GatewayIntent;
 import net.dv8tion.jda.api.requests.RestAction;
@@ -28,7 +28,7 @@ import static org.reflections.scanners.Scanners.TypesAnnotated;
 
 public class Surrella implements Loggable {
     @Getter
-    private static final String VERSION = "beta 1.3";
+    private static final String VERSION = "beta 1.4";
 
     private static Surrella instance;
 
