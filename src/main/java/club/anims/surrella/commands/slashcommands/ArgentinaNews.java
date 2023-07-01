@@ -53,7 +53,7 @@ public class ArgentinaNews extends SlashCommandAdapter implements SlashCommandOp
 
         if(!getContext().getOptions().get(0).getAsBoolean()){
             output = "Daily Argentina News has been disabled";
-            subscribedGuilds.remove(getContext().);
+            subscribedGuilds.remove(getContext().getChannelUnion().asGuildMessageChannel().getGuild());
         }
 
         return new SlashCommandReply(SlashCommandReply.ReplyType.EMBEDS, List.of(
