@@ -23,8 +23,7 @@ import java.util.TimerTask;
 
 @SlashCommand(name = "argentina_news", description = "Sends Daily Argentina News", permission = Permission.MOD, aliases = {"an"})
 public class ArgentinaNews extends SlashCommandAdapter implements SlashCommandOptions, Loggable {
-    //    private static final int ARGENTINA_NEWS_INTERVAL = 1000 * 60 * 60 * 24;
-    private static final int ARGENTINA_NEWS_INTERVAL = 1000 * 30;
+    private static final int ARGENTINA_NEWS_INTERVAL = 1000 * 60 * 60 * 24;
 
     private static final HashMap<Guild, TextChannel> subscribedGuilds = new HashMap<>();
 
@@ -46,7 +45,7 @@ public class ArgentinaNews extends SlashCommandAdapter implements SlashCommandOp
                     channel.sendMessageEmbeds(news).queue();
                 }
             }
-        }, 0L, ARGENTINA_NEWS_INTERVAL);
+        }, (long) (1000 * 60), ARGENTINA_NEWS_INTERVAL);
     }
 
     public ArgentinaNews(SlashCommandContext context) {
