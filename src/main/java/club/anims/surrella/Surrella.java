@@ -1,7 +1,11 @@
 package club.anims.surrella;
 
 import club.anims.surrella.audio.AudioPlayerSendHandler;
-import club.anims.surrella.commands.*;
+import club.anims.surrella.commands.SlashCommand;
+import club.anims.surrella.commands.SlashCommandContext;
+import club.anims.surrella.commands.SlashCommandListenerAdapter;
+import club.anims.surrella.commands.SlashCommandOptions;
+import club.anims.surrella.commands.slashcommands.ArgentinaNews;
 import club.anims.surrella.config.Config;
 import club.anims.surrella.interfaces.Loggable;
 import club.anims.surrella.listeners.MovementListenerAdapter;
@@ -11,7 +15,9 @@ import com.sedmelluq.discord.lavaplayer.source.AudioSourceManagers;
 import lombok.Getter;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
-import net.dv8tion.jda.api.entities.*;
+import net.dv8tion.jda.api.entities.Activity;
+import net.dv8tion.jda.api.entities.Guild;
+import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.channel.middleman.AudioChannel;
 import net.dv8tion.jda.api.interactions.commands.build.OptionData;
 import net.dv8tion.jda.api.requests.GatewayIntent;
@@ -28,7 +34,7 @@ import static org.reflections.scanners.Scanners.TypesAnnotated;
 
 public class Surrella implements Loggable {
     @Getter
-    private static final String VERSION = "beta 1.4";
+    private static final String VERSION = "beta 1.5 argentina";
 
     private static Surrella instance;
 
@@ -89,6 +95,7 @@ public class Surrella implements Loggable {
         timer = new Timer();
         followingMembers = new HashMap<>();
         jailedMembers = new HashMap<>();
+        ArgentinaNews.init();
     }
 
     /**
