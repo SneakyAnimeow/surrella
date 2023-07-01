@@ -84,8 +84,8 @@ public class ArgentinaNews extends SlashCommandAdapter implements SlashCommandOp
         var plnToArs = plnToEuro / arsToEuro;
         var arsToPln = arsToEuro / plnToEuro;
 
-        fields.put("Exchange Rate [PLN => ARS]", String.valueOf(plnToArs));
-        fields.put("Exchange Rate [ARS => PLN]", String.valueOf(arsToPln));
+        fields.put("Exchange Rate [PLN => ARS]", String.format("%.5f", plnToArs));
+        fields.put("Exchange Rate [ARS => PLN]", String.format("%.5f", arsToPln));
     }
 
     @Override
