@@ -1,4 +1,5 @@
 {
   "token": "<BOT_TOKEN>",
-  "ownerId": "<OWNER_ID>"
+  "ownerId": "<OWNER_ID>",
+  "exchangeRateApiKey": "<EXCHANGE_RATE_API_KEY>"
 }

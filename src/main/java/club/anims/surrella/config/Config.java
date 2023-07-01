@@ -25,6 +25,11 @@ public class Config implements Jsonable<Config> {
      */
     private String ownerId;
 
+    /**
+     * Exchange rate API key
+     */
+    private String exchangeRateApiKey;
+
     @SneakyThrows
     public static Config getInstance() {
         return instance == null ? instance = new Config().fromJson(Files.readString(PATH)) : instance;
